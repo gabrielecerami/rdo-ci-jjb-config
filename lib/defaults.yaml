@@ -1,0 +1,10 @@
+# Defaults
+#
+# defaults cannot be called with variable names
+# this strongly limits their use
+
+- defaults:
+    name: khaleesi
+
+# /Defaults
+

@@ -1,0 +1,54 @@
+# Publishers
+#
+
+- publisher:
+    name: pub-junit
+    publishers:
+        - junit:
+            results: "**/*.xml"
+            keep-long-stdio: false
+
+- publisher:
+    name: archive-artifacts
+    publishers:
+        - archive:
+            artifacts: "**/*.tbz2"
+            latest-only: false
+            allow-empty: true
+        - archive:
+            artifacts: "*.json, *.txt"
+            latest-only: false
+            allow-empty: true
+
+
+- publisher:
+    name: archive-artifacts-foreman
+    publishers:
+        - archive:
+            artifacts: "**/*.tbz2, stdstream_logs/*"
+            latest-only: false
+            allow-empty: true
+        - archive:
+            artifacts: "*.json, *.txt"
+            latest-only: false
+            allow-empty: true
+
+- publisher:
+    name: standard-email
+    publishers:
+        - email-ext:
+            recipients: "{recipients}"
+            replyto: $DEFAULT_REPLYTO
+            subject: $DEFAULT_SUBJECT
+            body: $DEFAULT_CONTENT
+            attach-build-log: false
+            always: true
+
+- publisher:
+    name: default-publishers
+    publishers:
+        - pub-junit
+        - archive-artifacts
+
+# /Publishers
+

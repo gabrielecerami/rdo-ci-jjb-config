@@ -1,0 +1,69 @@
+# Scms
+#
+
+- scm:
+    name: git-khaleesi
+    scm:
+        - git:
+            url: https://github.com/redhat-openstack/khaleesi.git
+            branches:
+                - "{branch}"
+            disable-submodules: false
+            recursive-submodule: false
+            skip-tag: false
+            use-author: false
+            clean: false
+            wipe-workspace: false
+            prune: false
+            fastpoll: false
+            shallow-clone: false
+            choosing-strategy: default
+            git-tool: Default
+            browser: githubweb
+            browser-url: https://github.com/redhat-openstack/khaleesi.git
+            basedir: khaleesi
+
+- scm:
+    name: git-khaleesi-foreman
+    scm:
+        - git:
+            url: https://github.com/redhat-openstack/khaleesi.git
+            branches:
+                - "master"
+            skip-tag: false
+            wipe-workspace: true
+            browser: githubweb
+            browser-url: https://github.com/redhat-openstack/khaleesi.git
+            basedir: khaleesi
+
+
+## Foreman
+#
+
+- scm:
+    name: git-astapor
+    scm:
+        - git:
+            url: 'https://github.com/redhat-openstack/astapor.git'
+            branches:
+                # */1_0_stable
+                - "{branch}"
+            basedir: astapor
+            browser: githubweb
+            browser-url: https://github.com/redhat-openstack/astapor.git
+
+- scm:
+    name: git-openstack-puppet-modules
+    scm:
+        - git:
+            url: 'https://github.com/redhat-openstack/openstack-puppet-modules.git'
+            branches:
+                # */havana
+                - "{branch}"
+            basedir: openstack-puppet-modules
+            browser: githubweb
+            browser-url: https://github.com/redhat-openstack/openstack-puppet-modules.git
+
+
+# /Scms
+

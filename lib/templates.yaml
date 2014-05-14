@@ -1,0 +1,99 @@
+# Templates
+#
+
+- job-template:
+    name: '{framework}-{joboptionsvariant}_{installer}_{product}_{productrelease}_{productreleaserepo}-repo_{distribution}-{distrorelease}_{topology}_{networking}_{variant}-variant_{testsuite}-tests'
+    display-name: '{installer}_{product}_{productrelease}_{productreleaserepo}-repo_{distribution}-{distrorelease}_{topology}_{networking}_{variant}-variant_{testsuite}-tests'
+    concurrent: false
+    disabled: false
+    block-downstream: false
+    block-upstream: false
+    description: |
+        <br><pre>
+        <b>- Job info -</b>
+
+        Framework              : <b>{framework}</b>
+        Job options Variant    : <b>{joboptionsvariant}</b>
+            <blockquote>{jov-description}</blockquote>
+
+        <pre>
+        <b>- Installation info -</b>
+
+        Installer              : <b>{installer}</b>
+        Product                : <b>{product}</b>
+        Product Release        : <b>{productrelease}</b>
+        Product Release Repo   : <b>{productreleaserepo}</b>
+        Distribution           : <b>{distribution}</b>
+        Distribution Release   : <b>{distrorelease}</b>
+
+
+        <b>- Build Setup -</b>
+
+        Topology               : <b>{topology}</b>
+        Network provider       : <b>{networking}</b>
+        Build Variant          : <b>{variant}</b>
+            <blockquote>{variant-description}</blockquote>
+        <pre>
+        Test Suite             : <b>{testsuite}</b>
+
+        </pre>
+        <b>PLEASE NOTE</b> This job is managed by jenkins job builder, that does not track any local modification. Any local change made to its configuration may be discarded at any time during the update process
+    logrotate:
+        daysToKeep: 15
+        numToKeep: 15
+        artifactDaysToKeep: 3
+        artifactNumKeep: 3
+    properties:
+        - "properties-{framework}-{joboptionsvariant}":
+    parameters:
+        - "parameters-{framework}-{joboptionsvariant}":
+            installer: "{installer}"
+            product: "{product}"
+            productrelease: "{productrelease}"
+            productreleaserepo: "{productreleaserepo}"
+            topology: "{topology}"
+            networking: "{networking}"
+            distribution: "{distribution}"
+            distrorelease: "{distrorelease}"
+            variant: "{variant}"
+            testsuite: "{testsuite}"
+    scm:
+        - "scm-{framework}-{joboptionsvariant}":
+    triggers:
+        - "triggers-{framework}-{joboptionsvariant}":
+    builders:
+        - "builders-{framework}-{joboptionsvariant}":
+            framework: "{framework}"
+            joboptionsvariant: "{joboptionsvariant}"
+            installer: "{installer}"
+            product: "{product}"
+            productrelease: "{productrelease}"
+            productreleaserepo: "{productreleaserepo}"
+            topology: "{topology}"
+            networking: "{networking}"
+            distribution: "{distribution}"
+            distrorelease: "{distrorelease}"
+            variant: "{variant}"
+            testsuite: "{testsuite}"
+    publishers:
+        - "publishers-{framework}-{joboptionsvariant}":
+            framework: "{framework}"
+            joboptionsvariant: "{joboptionsvariant}"
+            installer: "{installer}"
+            product: "{product}"
+            productrelease: "{productrelease}"
+            productreleaserepo: "{productreleaserepo}"
+            topology: "{topology}"
+            networking: "{networking}"
+            distribution: "{distribution}"
+            distrorelease: "{distrorelease}"
+            variant: "{variant}"
+            testsuite: "{testsuite}"
+    wrappers:
+        - "wrappers-{framework}-{joboptionsvariant}":
+    node: "{label}"
+
+
+
+# /Templates
+

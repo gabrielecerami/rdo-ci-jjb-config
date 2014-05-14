@@ -1,0 +1,69 @@
+# Projects
+#
+
+## Descriptions
+#
+- descriptions:
+    # This block contains variant description for the
+    # projects. No loose anchors are allowed in jjb parser so
+    # they have to be grouped inside a named but irrelevant block
+    # This block CANNOT be moved elsewhere, anchors must remain in the same document
+    # where they are to be used
+    name: descriptions
+
+    basic_jov_description: &basic_jov_description
+        jov-description: |
+            this is the basic variant of the job parameters
+
+    basic_variant_description: &basic_variant_description
+        variant-description: |
+            This is the basic variant of the job
+
+- framework-combinations:
+    name: framework-combinations
+
+    khaleesi-basic: &khaleesi-basic
+        framework: khaleesi
+        joboptionsvariant: basic
+        # Merge variant description
+        <<: *basic_jov_description
+
+
+- job-combinations:
+    name: job-combinations
+    example-combination: &example-combination
+        installer:
+            - packstack
+        productrelease:
+            - icehouse
+        product:
+            - rdo
+        topology:
+            - multinode
+        networking:
+            - neutron
+        distribution:
+            - fedora
+        distrorelease:
+            - 20
+        productreleaserepo:
+            - production
+        variant:
+            - basic
+        # Merge variant description
+        <<: *basic_variant_description
+        testsuite:
+            - server-basic-ops
+
+
+- project:
+    name: example-project
+    # Merge Framework variant
+    <<: *khaleesi-basic
+    # Merge job combination
+    <<: *example-combination
+    jobs:
+        - '{framework}-{joboptionsvariant}_{installer}_{product}_{productrelease}_{productreleaserepo}-repo_{distribution}-{distrorelease}_{topology}_{networking}_{variant}-variant_{testsuite}-tests':
+            label: master
+# /Projects
+

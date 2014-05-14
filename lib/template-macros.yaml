@@ -1,0 +1,80 @@
+## Framework Job Variants definitions
+
+
+# Define here the various elements of the job, using
+# framework and joboptionsvariant
+# properties:
+#     name: properties-{framework}-{joboptionsvariant}
+# parameters:
+#     name: parameters-{framework}-{joboptionsvariant}
+# scm:
+#     name: scm-{framework}-{joboptionsvariant}
+# triggers:
+#     name: triggers-{framework}-{joboptionsvariant}
+# builders:
+#     name: builders-{framework}-{joboptionsvariant}
+# publishers:
+#     name: publishers-{framework}-{joboptionsvariant}
+# wrappers:
+#     name: wrappers-{framework}-{joboptionsvariant}
+
+# Basic Job options variant
+
+- property:
+    name: properties-khaleesi-basic
+    properties: []
+
+- scm:
+    name: scm-khaleesi-basic
+    scm:
+        - git-khaleesi:
+            branch: master
+
+- parameter:
+    name: parameters-khaleesi-basic
+    parameters:
+        - ansible-colors
+        - khaleesi-settings-path:
+            settings-path: "khaleesi/settings"
+        - site:
+            site: <provisioning site>
+        - build-framework-tags:
+            tags: provision,prep,workaround,run-packstack,tempest_setup,tempest_run
+        - build-infrastructure-password:
+            # Password hash is dependent on jenkins server
+            # the only way to get this is try it via web an the copy the has from xml config
+            password-hash: <hash>
+
+- builder:
+    name: builders-khaleesi-basic
+    builders:
+        - khaleesi:
+            python-version: default-python
+            installer: "{installer}"
+            product: "{product}"
+            productrelease: "{productrelease}"
+            productreleaserepo: "{productreleaserepo}"
+            topology: "{topology}"
+            networking: "{networking}"
+            distribution: "{distribution}"
+            distrorelease: "{distrorelease}"
+            variant: "{variant}"
+            testsuite: "{testsuite}"
+
+- trigger:
+    name: triggers-khaleesi-basic
+    triggers:
+        - workdays-all-day-random-every-eight-hours
+
+- publisher:
+    name: publishers-khaleesi-basic
+    publishers:
+        - default-publishers
+
+- wrapper:
+    name: wrappers-khaleesi-basic
+    wrappers:
+        - default-wrappers
+
+# /Framework variant
+

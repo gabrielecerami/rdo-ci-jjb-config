@@ -1,0 +1,272 @@
+# Parameters
+#
+
+## Generic
+#
+
+- parameter:
+    name: site
+    parameters:
+        - string:
+            name: SITE
+            default: "{site}"
+
+- parameter:
+    name: ansible-colors
+    parameters:
+        - string:
+            name: ANSIBLE_FORCE_COLOR
+            default: "true"
+
+- parameter:
+    name: khaleesi-settings-path
+    parameters:
+        - string:
+            name: KHALEESI_SETTINGS_PATH
+            default: "{settings-path}"
+
+- parameter:
+    name: build-infrastructure-auth-url
+    parameters:
+        - string:
+            name: OS_AUTH_URL
+            default: "{auth-url}"
+            description:
+
+- parameter:
+    name: build-infrastructure-user
+    parameters:
+        - string:
+            name: OS_USERNAME
+            default: "{user}"
+            description:
+
+- parameter:
+    name: build-infrastructure-password
+    parameters:
+        - password:
+            name: OS_PASSWORD
+            default: "{password-hash}"
+            description:
+
+- parameter:
+    name: build-infrastructure-tenant
+    parameters:
+        - string:
+            name: OS_TENANT_NAME
+            default: "{tenant}"
+            description:
+
+# TODO: NODE_PREFIX will be handled by khaleesi in the future
+- parameter:
+    name: build-infrastructure-node-prefix
+    parameters:
+        - string:
+            name: NODE_PREFIX
+            default: "{productrelease}-{topology}-{distribution}{distrorelease}-{productreleaserepo}"
+            description:
+
+- parameter:
+    name: build-infrastructure-key-file-remote
+    parameters:
+        - string:
+            name: KEY_FILE_REMOTE
+            default: "{key-file-remote-url}"
+            description:
+
+- parameter:
+    name: build-infrastructure-key-file
+    parameters:
+        - string:
+            name: KEY_FILE
+            default: "{key-file-path}"
+            description:
+
+- parameter:
+    name: build-infrastructure-ssh-key-name
+    parameters:
+        - string:
+            name: SSH_KEY_NAME
+            default: "{ssh-key-name}"
+            description:
+
+- parameter:
+    name: build-infrastructure-flavor-id
+    parameters:
+        - string:
+            name: FLAVOR_ID
+            default: "{flavor-id}"
+            description:
+
+- parameter:
+    name: build-infrastructure-floating-network-name
+    parameters:
+        - string:
+            name: FLOATING_NETWORK_NAME
+            default: "{floating-network-name}"
+            description: public or external
+
+- parameter:
+    name: build-framework-tags
+    parameters:
+        - string:
+            name: TAGS
+            default:  "{tags}"
+            description: provision,tempest_run
+
+- parameter:
+    name: build-tests-name
+    parameters:
+        - string:
+            name: TEMPEST_TEST_NAME
+            default: "{tests-name}"
+            description: "example: tempest.scenario.test_network_basic_ops"
+
+- parameter:
+    name: build-infrastructure-image-preferred-name
+    parameters:
+        - string:
+            name: IMAGE_PREFERRED_NAME
+            default: "{image-preferred-name}"
+            description:
+
+- parameter:
+    name: build-infrastructure-image-id
+    parameters:
+        - string:
+            name: IMAGE_ID
+            default: "{image-id}"
+            description:
+
+- parameter:
+    name: build-infrastructure-tempest-image-id
+    parameters:
+        - string:
+            name: TEMPEST_IMAGE_ID
+            default: "{tempest-image-id}"
+            description:
+
+- parameter:
+    name: build-infrastructure-netid-1
+    parameters:
+        - string:
+            name: NET_1
+            default: "{net1-id}"
+            description:
+
+- parameter:
+    name: build-infrastructure-netname-1
+    parameters:
+        - string:
+            name: NET_1_NAME
+            default: "{net1-name}"
+            description:
+
+- parameter:
+    name: build-infrastructure-netid-2
+    parameters:
+        - string:
+            name: NET_2
+            default: "{net2-id}"
+            description:
+
+- parameter:
+    name: build-infrastructure-netname-2
+    parameters:
+        - string:
+            name: NET_2_NAME
+            default: "{net2-name}"
+            description:
+
+- parameter:
+    name: build-infrastructure-image-remote-user
+    parameters:
+        - string:
+            name: REMOTE_USER
+            default: "{remote-user}"
+            description:
+
+- parameter:
+    name: build-infrastructure-tempest-remote-user
+    parameters:
+        - string:
+            name: TEMPEST_REMOTE_USER
+            default: "{tempest-remote-user}"
+            description:
+
+- parameter:
+    name: build-infrastructure-network-type
+    parameters:
+        - string:
+            name: OS_NETWORK_TYPE
+            default: "{os-network-type}"
+            description:
+
+- parameter:
+    name: build-infrastructure-openstack-foreman-parameters
+    parameters:
+        - build-infrastructure-auth-url:
+            auth-url: "{auth-url}"
+        - build-infrastructure-user:
+            user: "{user}"
+        - build-infrastructure-password:
+            password-hash: "{password-hash}"
+        - build-infrastructure-tenant:
+            tenant: "{tenant}"
+        - build-infrastructure-key-file-remote:
+            key-file-remote-url: "{key-file-remote-url}"
+        - build-infrastructure-key-file:
+            key-file-path: "{key-file-path}"
+        - build-infrastructure-ssh-key-name:
+            ssh-key-name: "{ssh-key-name}"
+        - build-infrastructure-flavor-id:
+            flavor-id: "{flavor-id}"
+        - build-infrastructure-floating-network-name:
+            floating-network-name: "{floating-network-name}"
+        - build-infrastructure-network-type:
+            os-network-type: "{infrastructure-network-type}"
+        - build-tests-name:
+            tests-name: "{tests-name}"
+
+- parameter:
+    name: build-infrastructure-openstack-parameters
+    parameters:
+        - build-infrastructure-auth-url:
+            auth-url: "{auth-url}"
+        - build-infrastructure-user:
+            user: "{user}"
+        - build-infrastructure-password:
+            password-hash: "{password-hash}"
+        - build-infrastructure-tenant:
+            tenant: "{tenant}"
+        - build-infrastructure-key-file-remote:
+            key-file-remote-url: "{key-file-remote-url}"
+        - build-infrastructure-key-file:
+            key-file-path: "{key-file-path}"
+        - build-infrastructure-ssh-key-name:
+            ssh-key-name: "{ssh-key-name}"
+        - build-infrastructure-flavor-id:
+            flavor-id: "{flavor-id}"
+        - build-infrastructure-floating-network-name:
+            floating-network-name: "{floating-network-name}"
+        - build-infrastructure-netid-1:
+            net1-id: "{net1-id}"
+        - build-infrastructure-netname-1:
+            net1-name: "{net1-name}"
+        - build-infrastructure-netid-2:
+            net2-id: "{net2-id}"
+        - build-infrastructure-netname-2:
+            net2-name: "{net2-name}"
+        - build-infrastructure-image-remote-user:
+            remote-user: "{remote-user}"
+        - build-infrastructure-tempest-remote-user:
+            tempest-remote-user: "{tempest-remote-user}"
+        - build-infrastructure-image-id:
+            image-id: "{image-id}"
+        - build-infrastructure-tempest-image-id:
+            tempest-image-id: "{tempest-image-id}"
+        - build-infrastructure-network-type:
+            os-network-type: "{infrastructure-network-type}"
+
+# /Parameters
+

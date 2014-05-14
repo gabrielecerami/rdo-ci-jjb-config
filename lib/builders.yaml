@@ -1,0 +1,73 @@
+# Builders
+#
+
+- builder:
+    name: khaleesi
+    builders:
+        - shining-panda:
+            build-environment: virtualenv
+            python-version: "{python-version}"
+            nature: shell
+            clear: false
+            use-distribute: true
+            system-site-packages: false
+            ignore-exit-code: false
+            command: |
+                pip install ansible==1.5.3 > /dev/null 2>&1
+                pip install argparse
+
+                export ANSIBLE_HOST_KEY_CHECKING=False
+                export ANSIBLE_ROLES_PATH=$WORKSPACE/khaleesi/roles
+                export ANSIBLE_LIBRARY=$WORKSPACE/khaleesi/library:$VIRTUAL_ENV/share/ansible
+
+                pushd khaleesi
+
+                export CALL_DIRECT_CLEANUP=false
+                ln -sf ${{WORKSPACE}}/${{KHALEESI_SETTINGS_PATH}}/{installer}/{product}/{productrelease}/{distribution}-{distrorelease}_{topology}_{networking}_{variant}.yml job_settings.yml
+                ln -sf ${{WORKSPACE}}/${{KHALEESI_SETTINGS_PATH}}/repo_settings.yml repo_settings.yml
+                if [[ ! -e inventory.ini && ! -e nodes.yml || (( -e nodes.yml && -h nodes.yml )) ]]  ; then
+                    # Node or inventory not previously created
+                    # No hosts were provisioned, use direct provisioning
+                    export CALL_DIRECT_CLEANUP=true
+                    ln -sf ${{WORKSPACE}}/${{KHALEESI_SETTINGS_PATH}}/{installer}/topologies/{topology}_nodes.yml nodes.yml
+                fi
+
+                ./run.sh -P {topology}.yml \
+                    --use-python-generator \
+                    --settings-path ${{WORKSPACE}}/${{KHALEESI_SETTINGS_PATH}} \
+                    --site $SITE \
+                    --installer {installer} \
+                    --product {product} \
+                    --productreleaserepo {productreleaserepo} \
+                    --productrelease {productrelease} \
+                    --distribution {distribution} \
+                    --distrorelease {distrorelease} \
+                    --topology {topology} \
+                    --networking {networking} \
+                    --variant {variant} \
+                    --testsuite {testsuite}
+                if [ ${{CALL_DIRECT_CLEANUP}} == "true" ]; then
+                    ./cleanup.sh
+                fi
+                popd
+
+
+- builder:
+    name: khaleesi-foreman
+    builders:
+        - critical-block-start
+        - shining-panda:
+            build-environment: virtualenv
+            python-version: "System-CPython-2.7"
+            nature: shell
+            clear: false
+            use-distribute: true
+            system-site-packages: false
+            ignore-exit-code: false
+            command: |
+                set -v
+                ${{WORKSPACE}}/${{KHALEESI_SETTINGS_PATH}}/foreman/jenkins/scripts/${{JOB_NAME}}.sh
+        - critical-block-end
+
+# /Builders
+

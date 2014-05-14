@@ -1,0 +1,13 @@
+# Wrappers
+#
+
+- wrapper:
+    name: default-wrappers
+    wrappers:
+        - ansicolor:
+            colormap: xterm
+        - timestamps
+        - workspace-cleanup
+
+# /Wrappers
+
