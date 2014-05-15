@@ -1,10 +1,10 @@
 IMPORTANT
 ========
 
-at the time of writing (may 2014), the latest jjb version () has a bug that prevents this configuration
+at the time of writing (may 2014), the latest jjb version has a bug that prevents this configuration
 to work:
 
-.. _Nested Macro MultiSCM bug: https://bugs.launchpad.net/openstack-ci/+bug/1285515
+https://bugs.launchpad.net/openstack-ci/+bug/1285515
 
 fix is awaiting approval.
 
