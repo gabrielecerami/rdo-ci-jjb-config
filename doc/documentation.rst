@@ -1,12 +1,26 @@
+IMPORTANT
+========
+
+at the time of writing (may 2014), the latest jjb version () has a bug that prevents this configuration
+to work:
+
+.. _Nested Macro MultiSCM bug: https://bugs.launchpad.net/openstack-ci/+bug/1285515
+
+fix is awaiting approval.
+
+
 Directory Structure
 ===================
 
 the most important directory in the tree is
-**lib** which contains the library of definitions for the jobs
-Definitions are grouped by module category, so all parameters are in the same file
+**lib** which contains the library of definitions for the jobs.
+
+Definitions are grouped by module category, so all parameters are in the same file,
 builders are in the same file, and so on.
+
 Projects are in the separated directory **projects** and are grouped by destination
 server, so every jenkins server can have a different set of jobs.
+
 The contents of the file **template-macros** that does not correspond to any 
 jenkins job builder module are discussed after.
 
@@ -36,18 +50,21 @@ How to prepare configuration for use.
 -----------------------------------
 
 The directory structure cannot be used as is.
+
 The basic idea is that the every different jenkins server should have its own set of jobs
 but code to define the jobs must not be replicated.
+
 Job creation in a server is driven by the "project" block. This means that every server
-should have his own set of "project" blocks
+should have his own set of "project" blocks.
+
 The entire library of definition instead should be available for all jobs on all the servers
 
 The preferred method to obtain this scenario in the configuration is:
-create a project file on lib/projects directory
-create a directory with a name that refers to you destination server
-create symbolic links for all the library files in lib
-[ optional ] create symbolic links for all the *private* library files in a private lib directory
-create a symbolic link for the project file in lib/project/destserver
+* create a project file on lib/projects directory
+* create a directory in jobs/ with a name that refers to you destination server
+* create symbolic links for all the library files in lib
+* [ optional ] create symbolic links for all the *private* library files in a private lib directory
+* create a symbolic link for the project file in lib/project/destserver
 
 
 then apply all your command to this newly created directory.
@@ -68,6 +85,7 @@ job options variants
     the name of a set of jenkins configuration variables.
 
 These two parameters are used by jjb to manage all the components used to create a jekins job.
+
 The following are generally no handled directly by jjb , sometimes are used to modify certain build parameters
 but mainly are directly passed to the framework so the framework knows what to build.
 
@@ -123,14 +141,17 @@ Block Structure and indirections
 
 To understand how the different files and block of definitions work together to form a job definition
 let's start from the last piece that jjb evaluates: the projects.
+
 The most difficult interaction to understand lies between projects file, template file, and template macros file.
 
 Project file
 ------------
 
 Descriptions and combinations are named blocks that contain referrable dictionaries (using pure yaml anchors)
+
 Using this method is the only possible way of including parts of the definitions dinamically for code reusing, without
 recurring to external tools that implement inclusion of yaml files (standard yaml does not implement inclusion)
+
 Unfortunately this blocks must reside on the same yaml documents, because standard yaml allows the use of anchors
 only within the same document
 
@@ -250,6 +271,7 @@ Macros
 ++++++
 
 This jjb configuration make heavy use of macros.
+
 The idea followed was to use a single template for all the jobs. This allowed to avoid replication of code, using the same name
 structure for all the jobs, and concentrating efforts in definitions of new jobs only in the place where
 it is really necessary: assembling macro definitions for the job we want to create.
@@ -281,6 +303,7 @@ Template macros file
 --------------------
 
 This file collates the job definition with the rest of the modules.
+
 The function of macros in the file is to include all the necessary modules into the job.
 Macros present in template file will be named after the framwork-jobsoptionvariant combination, with a suffix that specify
 the category of macros that these macros will in turn include to form the job definition.
@@ -330,18 +353,15 @@ Tips for creating jobs
 
 The benefits of using jjb come when you are grouping similar job in a way that a single
 modification affects the largest number of jobs possible.
+
 If the jobs are ALL different from each other, then jjb acts as a mere translator from yaml
 to jenkins, with the only benefint to use a text editor instead of web forms to 
 define your job.
 
 In this perspective to benefints from jjb one must think in job groups.
+
 For every job on must ask to him/her self: what this job has in common with the 
 others ?
+
 Every job must have a class, if you need a job that is different from all the others 
 youhave to create a class for it
-
-Deploy
-=====
-
-you can reduce to a single file or a two file configuration. like a static binary you can just
-concatenate all the files
