@@ -33,6 +33,7 @@
 - parameter:
     name: parameters-khaleesi-basic
     parameters:
+        - cleanup
         - ansible-colors
         - khaleesi-settings-path:
             settings-path: "khaleesi/settings"

@@ -46,7 +46,7 @@
                     --networking {networking} \
                     --variant {variant} \
                     --testsuite {testsuite}
-                if [ ${{CALL_DIRECT_CLEANUP}} == "true" ]; then
+                if [[ ${{CALL_DIRECT_CLEANUP}} == "true"  && ${{CLEANUP}} == "true" ]]; then
                     ./cleanup.sh
                 fi
                 popd

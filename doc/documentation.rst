@@ -60,6 +60,7 @@ should have his own set of "project" blocks.
 The entire library of definition instead should be available for all jobs on all the servers
 
 The preferred method to obtain this scenario in the configuration is:
+
 * create a project file on lib/projects directory
 * create a directory in jobs/ with a name that refers to you destination server
 * create symbolic links for all the library files in lib
@@ -339,7 +340,9 @@ File for all the other modules like parameters, properties, and so on follow thi
 * if you want to add two (or more) than one definition to the same macro, create two (or more) macros
   with only one definition eac, then create a macro that contains these two (or more) macros
 * macro use parameters for all the more variable variables
-  for example in defining an scm, the variable "branch" should receive a parameter ::
+  for example in defining an scm, the variable "branch" should receive a parameter
+
+.. code:: yaml
 
   - scm
     name: some repo

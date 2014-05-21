@@ -12,6 +12,13 @@
             default: "{site}"
 
 - parameter:
+    name: cleanup
+    parameters:
+        - string:
+            name: CLEANUP
+            default: "true"
+
+- parameter:
     name: ansible-colors
     parameters:
         - string:
