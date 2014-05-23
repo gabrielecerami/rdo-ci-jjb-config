@@ -256,7 +256,7 @@ block to form the jobs
     <<: *khaleesi-myserver-variant1
     <<: *packstack-rdo-havana-multinode-neutron-gre-f20
     jobs:
-        - '{framework}-{joboptionsvariant}_{installer}_{product}_{productrelease}_{productreleaserepo}-repo_{distribution}-{distrorelea#
+        - '{framework}-{joboptionsvariant}_{installer}_{product}_{productrelease}_{productreleaserepo}-repo_{distribution}-{distrorelease}_{topology}_{networking}_{variant}-variant_{testsuite}-tests':
             label: mylabel
 
 All the project in rdo ci jjb configuration will use the same template, passing a parameter to indicate which node to use for the specified job.
