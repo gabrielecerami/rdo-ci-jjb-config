@@ -13,7 +13,7 @@
             system-site-packages: false
             ignore-exit-code: false
             command: |
-                pip install ansible==1.5.3 > /dev/null 2>&1
+                pip install "ansible>1.6" > /dev/null 2>&1
                 pip install argparse
 
                 export ANSIBLE_HOST_KEY_CHECKING=False
