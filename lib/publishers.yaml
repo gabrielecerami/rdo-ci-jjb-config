@@ -45,6 +45,22 @@
             always: true
 
 - publisher:
+    name: selinux-warning
+    publishers:
+        - groovy-postbuild: >
+            def rules = [
+                ["site", "red"],
+            ]
+
+            def matcher
+                rules.each {
+                    matcher = manager.getLogMatcher(".avc:. denied.*")
+                    if(matcher?.matches()) {
+                        manager.addShortText("SELINUX DENIAL FOUND")
+                }
+            }
+
+- publisher:
     name: default-publishers
     publishers:
         - pub-junit
