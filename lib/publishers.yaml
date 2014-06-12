@@ -49,12 +49,12 @@
     publishers:
         - groovy-postbuild: >
             def rules = [
-                ["site", "red"],
+                ["site", "lightgreen"],
             ]
 
             def matcher
                 rules.each {
-                    matcher = manager.getLogMatcher(".avc:. denied.*")
+                    matcher = manager.getLogMatcher(".*avc:.* denied.*")
                     if(matcher?.matches()) {
                         manager.addShortText("SELINUX DENIAL FOUND")
                 }
